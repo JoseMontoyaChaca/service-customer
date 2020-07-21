@@ -1,0 +1,8 @@
+#services:
+# mymongodb:
+#    image:mongo:lastest
+#    container_name:"mymongodb"
+#    ports:
+#      -27017:27017
+#service-customer:
+#  image: service
