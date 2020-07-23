@@ -1,8 +1,14 @@
-#services:
-# mymongodb:
-#    image:mongo:lastest
-#    container_name:"mymongodb"
-#    ports:
-#      -27017:27017
-#service-customer:
-#  image: service
+version: "3.3"
+services:
+ mymongodb:
+   image: "mongo"
+   container_name: "mymongodb"
+   ports:
+     - 27017:27017
+ service-customer:
+   image: service-customer
+   container_name : service-customer
+   ports:
+     - 9192:9192
+   links:
+     - mymongodb
