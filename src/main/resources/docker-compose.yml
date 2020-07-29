@@ -9,6 +9,6 @@ services:
    image: service-customer
    container_name : service-customer
    ports:
-     - 9192:9192
+     - 8070:8070
    links:
      - mymongodb
