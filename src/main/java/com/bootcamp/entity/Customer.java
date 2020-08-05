@@ -14,15 +14,11 @@ import lombok.Data;
 @Document
 public class Customer implements Serializable{
 	
-	public Customer() {
-		// TODO Auto-generated constructor stub
-	}
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//@ApiModelProperty(value = "The id of the customer", required = false)
 	@Id
 	private String dniCustomer;
 	@NotNull
@@ -35,6 +31,10 @@ public class Customer implements Serializable{
 	private boolean status;
 	
 	private TypeCustomer typeCustomer;
+
+	
+	public Customer() {
+	}
 
 	
 

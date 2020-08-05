@@ -1,1 +1,1 @@
-spring:  application:    name: SERVICE-CUSTOMER  cloud:    config:      uri: http://localhost:8081      username: JoseMontoyaChaca      password: Xavi4###  autoconfigure:    exclude:    - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration         
+spring:  application:    name: SERVICE-CUSTOMER  cloud:    config:      uri: http://localhost:8081      username: JoseMontoyaChaca      password: Xavi4###  autoconfigure:    exclude:    - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration     

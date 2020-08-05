@@ -12,5 +12,6 @@ public class BankAccount {
 	private  Signatory signatory;
 	private String dniCustomer;
 	private double balance;
+	private String idBank;
 	
 }

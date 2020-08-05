@@ -31,22 +31,11 @@ public class CustomerController {
 	private WebClient bankAccount = WebClient.create("htpp://localhost:8072/bankAccount");
 	private WebClient credit	  = WebClient.create("htpp://localhost:8074/credit");
 
-	
-	
 	@Autowired
 	private CustomerService customerService; 
 	
-	
-	@GetMapping("/getBankAccount")
-	public Flux<BankAccount>getCustomer(){
-		return  bankAccount.get().uri("/getAllBankAccount").accept(MediaType.APPLICATION_JSON)
-				.retrieve()
-				.bodyToFlux(BankAccount.class)
-				.log("RETRIVE Bank ACCOUNT:: ");
-	}
-	
-	//GET BALANCE
-	@GetMapping("/getBalance/{dniCustomer}")
+	//Report of the products according to the client
+	@GetMapping("/reportProducts/{dniCustomer}")
 	public Flux<Object> getAllBankAccount(@PathVariable String dniCustomer){
 		Flux<BankAccount> bankList =  bankAccount.get().uri("/getDNI/{dniCustomer}",dniCustomer)
 				.accept(MediaType.APPLICATION_JSON)
@@ -66,42 +55,39 @@ public class CustomerController {
 		
 	}
 	
-
+	//CRUD
 	@PostMapping("/addCustomer")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Mono<Customer> saveCustomer(@RequestBody Customer customer) {
+	public Mono<Customer> saveCustomer		(@RequestBody Customer customer) {
 		return customerService.save(customer);	
 	}
 	
-	
 	@PutMapping("/updateCustomer")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public Mono<Void> updateCustomer(@RequestBody Customer cus){	
+	public Mono<Void> updateCustomer		(@RequestBody Customer cus){	
 		return customerService.updateCustomer(cus);
 	}
 	
-	@GetMapping("/getCustomer/{dniCustomer}")
+	@DeleteMapping("/delete/{dniCustomer}")
+	public Mono<Void>  delete				(@PathVariable String dniCustomer) {
+		return customerService.delete(dniCustomer);
+	}
+	
+	@GetMapping(path = "/{dniCustomer}")
 	public Mono<Customer> findByDNICustomer (@PathVariable String dniCustomer){
-	return customerService.findByDNICustomer(dniCustomer);
+		return customerService.findByDNICustomer(dniCustomer);
 
 	}
 	
-//	@ApiOperation(value = "Get Banks", notes = "Returns all bank")
-//	@ApiResponses({
-//	     @ApiResponse(code = 200, message = "Answer correctly")
-//	})
+	@GetMapping("/{id}")
+	public Mono<Customer> findById (@PathVariable String id){
+		return customerService.findById(id);
+
+	}
+	
 	@GetMapping("/allCustomer")
 	public Flux<Customer> getCustomerAll(){
 		return customerService.getAllCustomer();
 	}
 	
-	@DeleteMapping("/{dniCustomer}")
-	public Mono<Object>  delete(@PathVariable final String dniCustomer) {
-		System.out.println("::Will delete a Customer::");
-		return customerService.delete(dniCustomer);
-	}
-	
-	
-	
-
 }
